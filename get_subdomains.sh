@@ -78,9 +78,10 @@ while IFS= read -r DOMAIN; do
     cat "${OUTPUT_DIR}/amass.txt" "${OUTPUT_DIR}/subfinder.txt" "${OUTPUT_DIR}/puredns.txt" | sort -u > "${OUTPUT_DIR}/all_subdomains.txt"
     echo "Subdomain enumeration for $DOMAIN completed."
 
-    #TODO*************************************************NOT CURRENTLY WORKING AS A STANDALONE COMMAND
-    #Run subfinder and pipe to project nuclei and https to detect tech
-    # echo "Running tech-detect throug bruteforce for $DOMAIN..."
-    # cat all_subdomains.txt | httpx | nuclei -t technologies/tech-detect.yaml
+    chmod +x extract_domains all_subdomains.txt cleaned_domains.txt
+
+    #Run subfinder and pipe to project nuclei and httpx 
+    echo "Running Nuclei through subfinder and httpx for $DOMAIN..."
+    cat cleaned_domains.txt | httpx | nuclei -u "$DOMAIN"
 
 done < "$DOMAIN_FILE"
