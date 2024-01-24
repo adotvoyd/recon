@@ -37,9 +37,9 @@ install_packages amass subfinder massdns
 install_go_tool() {
     local tool_path="$1"
 
-    if ! command "$tool_path" &> /dev/null; then
+    if ! command -v "$tool_path" &> /dev/null; then
         echo "Installing $tool_path..."
-        go install -v "$tool_path"
+        go install "$tool_path"
         sudo mv "$tool_path" /usr/local/bin/  # Assuming /usr/local/bin is in your PATH
     else
         echo "$tool_path is already installed."
