@@ -37,19 +37,19 @@ install_packages amass subfinder massdns
 install_go_tool() {
     local tool_path="$1"
 
-    if ! command -v "$tool_path" &> /dev/null; then
+    if ! command "$tool_path" &> /dev/null; then
         echo "Installing $tool_path..."
-        go install "$tool_path"
+        go install -v "$tool_path"
         sudo mv "$tool_path" /usr/local/bin/  # Assuming /usr/local/bin is in your PATH
     else
         echo "$tool_path is already installed."
     fi
 }
 
-install_go_tool -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
-install_go_tool -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-install_go_tool -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-install_go_tool -v github.com/d3mondev/puredns/v2@latest
+install_go_tool github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+install_go_tool github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+install_go_tool github.com/projectdiscovery/httpx/cmd/httpx@latest
+install_go_tool github.com/d3mondev/puredns/v2@latest
 
 # Create a timestamp
 TIMESTAMP=$(date +"%Y%m%d%H%M")
