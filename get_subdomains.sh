@@ -34,7 +34,7 @@ install_go_tool() {
     if ! command -v "$tool_path" &> /dev/null; then
         echo "Installing $tool_path..."
         go install "$tool_path"
-        sudo mv "$tool_path" /usr/local/bin/  # Assuming /usr/local/bin is in your PATH
+        sudo mv "$tool_path" /usr/bin/  # Assuming /usr/local/bin is in your PATH
     else
         echo "$tool_path is already installed."
     fi
